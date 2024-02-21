@@ -1,1 +1,0 @@
-import{c as e,o as s,t}from"../chunks/disclose-version.VZqk-Wlb.js";import{p as r,a as m}from"../chunks/runtime.q09X8cJP.js";var f=t("<p>hello</p>");function c(p,a){m(a,!1);var o=s(p,!0,f);e(p,o),r()}export{c as component};

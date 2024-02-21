@@ -4,7 +4,7 @@ import adapter from '@sveltejs/adapter-static';
 const config = {
     kit: {
         adapter: adapter({
-            pages: 'docs',
+            pages: 'build',
         }),
         paths: {
             base: process.argv.includes('dev') ? '' : '/nature-bingo',
