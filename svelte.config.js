@@ -7,7 +7,9 @@ const config = {
             pages: 'build',
         }),
         paths: {
-            base: process.argv.includes('dev') ? '' : process.env.BASE_PATH,
+            base: process.argv.includes('dev')
+                ? ''
+                : process.env.BASE_PATH || '/nature-bingo',
         },
     },
 };
