@@ -15,38 +15,44 @@
         return () => canvas.remove();
     });
 
+    let generator = dailyShuffle(sights);
+
     let boardIndex = $state(0);
 
     /** @type {string[][]} */
     let boards = [];
 
-    let generator = dailyShuffle(sights);
+    /** @type {boolean[][]} */
+    let boardStates = $state([]);
 
-    /** @param {number} index */
-    function getBoard(index) {
-        while (boards.length <= index) {
-            boards.push(generator.curr);
-            generator = generator.next();
-        }
-
-        return boards[index].slice(0, 25).with(12, 'tree');
+    function makeNextBoard() {
+        boardStates.push(Array(25).fill(false));
+        boards.push(generator.curr);
+        generator = generator.next();
     }
 
-    let board = $derived(getBoard(boardIndex));
+    makeNextBoard();
+
+    let board = $derived(boards[boardIndex].slice(0, 25).with(12, 'tree'));
+    let boardState = $derived(boardStates[boardIndex]);
 
     function previous() {
         boardIndex--;
     }
 
     function next() {
+        if (boards.length <= boardIndex + 1) {
+            makeNextBoard();
+        }
+
         boardIndex++;
     }
 </script>
 
 {#if context}
     <div class="container">
-        {#each board as sight}
-            <Box {sight} {context} />
+        {#each board as sight, i}
+            <Box {sight} {context} bind:selected={boardState[i]} />
         {/each}
     </div>
 

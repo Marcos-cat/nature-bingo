@@ -5,10 +5,9 @@
         context: CanvasRenderingContext2D 
     }} */
 
-    let { sight, selected = false, context } = $props();
+    let { sight, selected, context } = $props();
 
-    const TREE = 'tree';
-    selected = sight == TREE;
+    let isTree = $derived(sight == 'tree');
 
     const COLOR = 'primary';
 
@@ -24,7 +23,7 @@
 
     /** @param {string} sight */
     function shortenSight(sight) {
-        if (sight == TREE) return sight;
+        if (isTree) return sight;
         if (!button) return '';
         const { font } = getComputedStyle(button);
         const { width, borderWidth } = getComputedStyle(button);
@@ -55,9 +54,9 @@
 </script>
 
 <button
-    disabled={sight == TREE}
+    disabled={isTree}
     bind:this={button}
-    class={`box ${selected ? `has-background-${COLOR}-light has-text-${COLOR}` : ''}`}
+    class={`box ${selected || isTree ? `has-background-${COLOR}-light has-text-${COLOR}` : ''}`}
     onclick={() => (selected = !selected)}
 >
     {shortenedSight}
