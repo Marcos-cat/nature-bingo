@@ -9,8 +9,6 @@
 
     let isTree = $derived(sight == 'tree');
 
-    const COLOR = 'primary';
-
     /** @type {HTMLButtonElement|null} */
     let button = $state(null);
 
@@ -56,7 +54,9 @@
 <button
     disabled={isTree}
     bind:this={button}
-    class={`box ${selected || isTree ? `has-background-${COLOR}-light has-text-${COLOR}` : ''}`}
+    class="box"
+    class:has-background-primary-light={selected || isTree}
+    class:has-text-primary={selected || isTree}
     onclick={() => (selected = !selected)}
 >
     {shortenedSight}

@@ -6,6 +6,7 @@
     const { sights } = data;
 
     let date = $state('');
+    let win = $state(false);
 
     $effect(() => {
         const now = new Date();
@@ -42,6 +43,18 @@
     </div>
 </nav>
 
-<h1 class="title has-text-centered">Nature Bingo</h1>
+{#snippet winStar()}
+    {#if win}
+        <span class="icon is-medium has-text-primary">
+            <i class="fa-solid fa-star"></i>
+        </span>
+    {/if}
+{/snippet}
 
-<Board {sights} />
+<h1 class="title has-text-centered">
+    {@render winStar()}
+    <span class:has-text-primary={win}> Nature Bingo </span>
+    {@render winStar()}
+</h1>
+
+<Board {sights} bind:win />

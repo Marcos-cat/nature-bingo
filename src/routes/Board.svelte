@@ -2,8 +2,8 @@
     import Box from './Box.svelte';
     import { dailyShuffle } from './shuffle';
 
-    /** @type {{ sights: string[] }} */
-    const { sights } = $props();
+    /** @type {{ sights: string[], win: boolean }} */
+    let { sights, win } = $props();
 
     /** @type {CanvasRenderingContext2D|null} */
     let context = $state(null);
@@ -35,6 +35,36 @@
 
     let board = $derived(boards[boardIndex].slice(0, 25).with(12, 'tree'));
     let boardState = $derived(boardStates[boardIndex]);
+
+    /** @param {boolean[]} boardArray */
+    function isWinningBingoBoard(boardArray) {
+        let board = [];
+        for (let i = 0; i < boardArray.length; i += 5) {
+            let row = boardArray.slice(i, i + 5);
+            board.push(row);
+        }
+
+        board[2][2] = true;
+
+        for (let row = 0; row < board.length; row++) {
+            if (board[row].every(val => val)) return true;
+        }
+
+        for (let col = 0; col < board[0].length; col++) {
+            if (board.every(row => row[col])) return true;
+        }
+
+        // prettier-ignore
+        if (board[0][0] && board[1][1] && board[2][2] && board[3][3] && board[4][4]) return true;
+        // prettier-ignore
+        if (board[0][4] && board[1][3] && board[2][2] && board[3][1] && board[4][0]) return true;
+
+        return false;
+    }
+
+    $effect(() => {
+        win = isWinningBingoBoard(boardState);
+    });
 
     function previous() {
         boardIndex--;
