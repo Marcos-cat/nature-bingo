@@ -15,39 +15,32 @@ function xorShift(n) {
 }
 
 /**
- * @template T
- * @typedef {{curr: T, next: () => Gen<T>}} Gen
- */
-
-/**
  * @param {number} seed
- * @returns {Gen<number>}
+ * @returns {Generator<number, never>}
  */
-function seededRandom(seed) {
-    const number = xorShift(seed);
-
-    return {
-        curr: Math.abs(number % 10000) / 10000,
-        next: () => seededRandom(number),
-    };
+function* seededRandom(seed) {
+    while (true) {
+        seed = xorShift(seed);
+        yield Math.abs(seed % 10000) / 10000;
+    }
 }
 
 /**
- * Takes an array and returns the same array in a random order without modifying
- * the original array
  * @param {readonly string[]} sights
- * @param {Gen<number>} [seed]
- * @returns {Gen<string[]>}
+ * @returns {Generator<string[], never>}
  */
-export function dailyShuffle(sights, seed) {
-    if (!seed) seed = seededRandom(daysSinceNewYear());
-    let sights_copy = [...sights];
+export function* dailyShuffle(sights) {
+    let gen = seededRandom(daysSinceNewYear());
 
-    for (let i = sights_copy.length - 1; i > 0; i--) {
-        seed = seed.next();
-        const j = Math.floor(seed.curr * (i + 1));
-        [sights_copy[i], sights_copy[j]] = [sights_copy[j], sights_copy[i]];
+    while (true) {
+        let sightsCopy = [...sights];
+
+        for (let i = sightsCopy.length - 1; i > 0; i--) {
+            const { value } = gen.next();
+            const j = Math.floor(value * (i + 1));
+            [sightsCopy[i], sightsCopy[j]] = [sightsCopy[j], sightsCopy[i]];
+        }
+
+        yield sightsCopy;
     }
-
-    return { curr: sights_copy, next: () => dailyShuffle(sights, seed) };
 }

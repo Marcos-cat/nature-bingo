@@ -27,8 +27,8 @@
 
     function makeNextBoard() {
         boardStates.push(Array(25).fill(false));
-        boards.push(generator.curr);
-        generator = generator.next();
+        const { value } = generator.next();
+        boards.push(value);
     }
 
     makeNextBoard();
