@@ -2,10 +2,10 @@
     /** @type {{ 
         sight: string, 
         selected?: boolean, 
+        winning: boolean,
         context: CanvasRenderingContext2D 
     }} */
-
-    let { sight, selected, context } = $props();
+    let { winning, sight, selected, context } = $props();
 
     let isTree = $derived(sight == 'tree');
 
@@ -55,6 +55,7 @@
     disabled={isTree}
     bind:this={button}
     class="box"
+    class:winning
     class:has-background-primary-light={selected || isTree}
     class:has-text-primary={selected || isTree}
     onclick={() => (selected = !selected)}
@@ -63,6 +64,10 @@
 </button>
 
 <style>
+    button.winning {
+        font-weight: bold;
+    }
+
     button.box {
         overflow: hidden;
 

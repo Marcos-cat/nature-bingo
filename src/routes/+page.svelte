@@ -18,17 +18,21 @@
     });
 </script>
 
+{#snippet dateTag()}
+    <span class="tag is-medium">
+        <span class="icon">
+            <i class="fa-solid fa-calendar"></i>
+        </span>
+        <span>
+            {date}
+        </span>
+    </span>
+{/snippet}
+
 <nav class="level is-mobile">
     <div class="level-left">
         <div class="level-item">
-            <span class="tag is-medium">
-                <span class="icon">
-                    <i class="fa-solid fa-calendar"></i>
-                </span>
-                <span>
-                    {date}
-                </span>
-            </span>
+            {@render dateTag()}
         </div>
     </div>
 
