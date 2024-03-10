@@ -2,7 +2,7 @@
     import Board from './Board.svelte';
 
     /** @type {{ data: import('./$types').PageData }} */
-    let { data } = $props();
+    const { data } = $props();
     const { sights } = data;
 
     let date = $state('');
@@ -40,7 +40,7 @@
         <div class="level-item">
             <button class="button is-ghost has-text-black">
                 <span class="icon is-medium">
-                    <i class="fa-solid fa-gear fa-2x"></i>
+                    <i class="fa-solid fa-bars fa-2x"></i>
                 </span>
             </button>
         </div>

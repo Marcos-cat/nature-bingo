@@ -2,7 +2,7 @@
     import Box from './Box.svelte';
     import { dailyShuffle } from './shuffle';
 
-    /** @type {{ sights: string[], win: boolean }} */
+    /** @type {{ sights: Sight[], win: boolean }} */
     let { sights, win } = $props();
 
     /** @type {CanvasRenderingContext2D|null} */
@@ -15,7 +15,14 @@
         return () => canvas.remove();
     });
 
-    let generator = dailyShuffle(sights);
+    const month = new Date().getMonth();
+    const seasonalSights = sights
+        .filter(
+            ({ duration: { start, end } }) => start <= month && month <= end,
+        )
+        .map(({ sight }) => sight);
+
+    let generator = dailyShuffle(seasonalSights);
 
     let boardIndex = $state(0);
 
