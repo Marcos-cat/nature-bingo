@@ -64,7 +64,22 @@
 </button>
 
 <style>
+    @keyframes bounce {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+            rotate: 3deg;
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
     button.winning {
+        animation: bounce 1s ease 1 forwards;
         font-weight: bold;
     }
 
