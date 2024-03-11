@@ -1,6 +1,7 @@
 <script>
     let { children, data } = $props();
     let { route } = $derived(data);
+    import { base } from '$app/paths';
 
     let isHome = $derived(route.id == '/');
 </script>
@@ -8,9 +9,9 @@
 <nav class="level is-mobile">
     <div class="level-left">
         <div class="level-item">
-            <a class="has-text-black" href={isHome ? '/info' : '/'}>
+            <a class="has-text-black" href={base + (isHome ? '/info' : '/')}>
                 <span class="icon is-medium m-16">
-                    <i 
+                    <i
                         class="fa-solid fa-2x"
                         class:fa-bars={isHome}
                         class:fa-home={!isHome}
