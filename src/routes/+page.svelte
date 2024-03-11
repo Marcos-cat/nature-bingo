@@ -1,51 +1,11 @@
 <script>
     import Board from './Board.svelte';
 
-    /** @type {{ data: import('./$types').PageData }} */
     const { data } = $props();
     const { sights } = data;
 
-    let date = $state('');
     let win = $state(false);
-
-    $effect(() => {
-        const now = new Date();
-        const month = now.getMonth() + 1;
-        const day = now.getDate();
-        const year = now.getFullYear().toString().slice(-2);
-
-        date = `${month}/${day}/${year}`;
-    });
 </script>
-
-{#snippet dateTag()}
-    <span class="tag is-medium">
-        <span class="icon">
-            <i class="fa-solid fa-calendar"></i>
-        </span>
-        <span>
-            {date}
-        </span>
-    </span>
-{/snippet}
-
-<nav class="level is-mobile">
-    <div class="level-left">
-        <div class="level-item">
-            {@render dateTag()}
-        </div>
-    </div>
-
-    <div class="level-right">
-        <div class="level-item">
-            <button class="button is-ghost has-text-black">
-                <span class="icon is-medium">
-                    <i class="fa-solid fa-bars fa-2x"></i>
-                </span>
-            </button>
-        </div>
-    </div>
-</nav>
 
 {#snippet winStar()}
     {#if win}
