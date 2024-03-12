@@ -41,11 +41,11 @@
     );
 </script>
 
-<nav class="level">
+<nav class="level is-mobile">
     <div class="level-left">
         {#if collapsable}
             <button onclick={() => (expanded = !expanded)}>
-                <span class="icon">
+                <span class="icon has-text-black">
                     <i
                         class="fa-solid fa-2x"
                         class:fa-caret-down={expanded}
