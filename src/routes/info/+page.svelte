@@ -38,7 +38,7 @@
 </script>
 
 <section class="section">
-    <h1 class="title is-spaced">Nature Bingo</h1>
+    <h1 class="title is-spaced has-text-centered">Nature Bingo</h1>
 
     <div class="block">
         <div class="control has-icons-left">

@@ -18,12 +18,11 @@
     {/if}
 {/snippet}
 
-<h1 class="title has-text-centered">
-    {@render winStar()}
-    <span class:has-text-primary={win}>Nature Bingo</span>
-    {@render winStar()}
-</h1>
-
 <main class="section">
+    <h1 class="title has-text-centered">
+        {@render winStar()}
+        <span class:has-text-primary={win}>Nature Bingo</span>
+        {@render winStar()}
+    </h1>
     <Board {sights} bind:win />
 </main>
