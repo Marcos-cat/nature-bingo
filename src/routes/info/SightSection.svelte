@@ -45,12 +45,12 @@
     <span class="icon-text">
         {#if collapsable}
             <button
-                class="icon has-text-black"
+                class="icon is-clickable has-text-dark"
                 onclick={() => (expanded = !expanded)}
                 style="background: none; border: none;"
             >
                 <i
-                    class="fa-solid"
+                    class="fa-solid fa-2x"
                     class:fa-caret-down={expanded}
                     class:fa-caret-right={!expanded}
                 ></i>

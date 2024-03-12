@@ -54,7 +54,7 @@
 <button
     disabled={isTree}
     bind:this={button}
-    class="box"
+    class="box is-clickable"
     class:winning
     class:has-background-primary-light={selected || isTree}
     class:has-text-primary={selected || isTree}

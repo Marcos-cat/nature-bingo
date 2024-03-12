@@ -2,9 +2,12 @@
     const { data } = $props();
     const { sights } = data;
 
-    import { isInSeason, isAlwaysInSeason } from "$lib/months";
-
     import SightSection from './SightSection.svelte';
+
+    import { isInSeason, isAlwaysInSeason } from '$lib/months';
+    import { title } from '$lib/title.svelte';
+
+    title('Info | Nature Bingo');
 
     let search = $state('');
 

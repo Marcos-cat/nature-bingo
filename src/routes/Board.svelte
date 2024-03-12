@@ -109,7 +109,7 @@
 </script>
 
 {#if context}
-    <div class="container">
+    <div class="container mb-6 p-0">
         {#each board as sight, i}
             <Box
                 {sight}
@@ -120,7 +120,7 @@
         {/each}
     </div>
 
-    <nav id="board-controls" class="level is-mobile">
+    <nav class="level is-mobile">
         <div class="level-item">
             <button
                 class="button is-primary"
@@ -154,15 +154,10 @@
 <style>
     div.container {
         --gap: 4px;
-        width: 90vw;
-        margin: auto;
-        max-width: 350px;
-
-        margin-bottom: 1em;
+        max-width: 20rem;
 
         display: grid;
         grid-template-columns: repeat(5, calc(20% - var(--gap)));
-        padding: 0;
         gap: var(--gap);
     }
 

@@ -6,10 +6,10 @@
     let isHome = $derived(route.id == '/');
 </script>
 
-<nav class="level is-mobile">
+<nav class="level is-mobile p-2">
     <div class="level-left">
         <div class="level-item">
-            <a class="has-text-black" href={base + (isHome ? '/info' : '/')}>
+            <a class="has-text-dark" href={base + (isHome ? '/info' : '/')}>
                 <span class="icon is-medium m-16">
                     <i
                         class="fa-solid fa-2x"
