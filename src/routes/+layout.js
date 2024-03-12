@@ -1,18 +1,22 @@
 export const prerender = true;
 export const trailingSlash = 'always';
 
-const months = 'jan feb mar apr may jun jul aug sep oct nov dec'.split(' ');
+import { fromMonthAbbreviation } from '$lib/months';
 
 /**
- * @param {string} month
+ * @param {string} monthAbbreviation
  * @returns {number}
  *
  * @throws when `month` is not a month abbreviation
  */
-function month(month) {
-    const index = months.indexOf(month);
-    if (index === -1) throw new Error(`"${month}" is an invalid month`);
-    return index;
+function month(monthAbbreviation) {
+    const month = fromMonthAbbreviation(monthAbbreviation);
+
+    if (month === null) {
+        throw new Error('Invalid month abbreviation: ' + monthAbbreviation);
+    }
+
+    return month;
 }
 
 /**
@@ -20,7 +24,7 @@ function month(month) {
  * @returns {Sight}
  */
 function parseSight(line) {
-    /** @type {Record<string, Duration>} */
+    /** @type {Record<string, {start: number, end: number}>} */
     const specialTimes = {
         all: { start: month('jan'), end: month('dec') },
         summer: { start: month('apr'), end: month('sep') },

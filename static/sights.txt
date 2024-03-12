@@ -46,3 +46,4 @@ river: all
 pond: all
 fungi: all
 sap bucket: feb-mar
+snow: dec-mar

@@ -1,9 +1,11 @@
 <script>
-    import Box from './Box.svelte';
-    import { dailyShuffle } from './shuffle';
-
     /** @type {{ sights: Sight[], win: boolean }} */
     let { sights, win } = $props();
+
+    import Box from './Box.svelte';
+
+    import { isInSeason } from '$lib/months';
+    import { dailyShuffle } from './shuffle';
 
     /** @type {CanvasRenderingContext2D|null} */
     let context = $state(null);
@@ -15,14 +17,13 @@
         return () => canvas.remove();
     });
 
-    const month = new Date().getMonth();
-    const seasonalSights = sights
-        .filter(
-            ({ duration: { start, end } }) => start <= month && month <= end,
-        )
+    const currentMonth = new Date().getMonth();
+
+    const inSeasonSights = sights
+        .filter(sight => isInSeason(currentMonth, sight))
         .map(({ sight }) => sight);
 
-    let generator = dailyShuffle(seasonalSights);
+    let generator = dailyShuffle(inSeasonSights);
 
     let boardIndex = $state(0);
 
