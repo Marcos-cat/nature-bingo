@@ -41,22 +41,24 @@
     );
 </script>
 
-<nav class="level is-mobile">
-    <div class="level-left">
+<h2 class="subtitle">
+    <span class="icon-text">
         {#if collapsable}
-            <button onclick={() => (expanded = !expanded)}>
-                <span class="icon has-text-black">
-                    <i
-                        class="fa-solid fa-2x"
-                        class:fa-caret-down={expanded}
-                        class:fa-caret-right={!expanded}
-                    ></i>
-                </span>
+            <button
+                class="icon has-text-black"
+                onclick={() => (expanded = !expanded)}
+                style="background: none; border: none;"
+            >
+                <i
+                    class="fa-solid"
+                    class:fa-caret-down={expanded}
+                    class:fa-caret-right={!expanded}
+                ></i>
             </button>
         {/if}
-        <h2 class="subtitle">{@render children()}</h2>
-    </div>
-</nav>
+        <span>{@render children()}</span>
+    </span>
+</h2>
 
 {#if expanded || !collapsable}
     {#if filteredList.length > 0}
@@ -90,12 +92,3 @@
         </div>
     {/if}
 {/if}
-
-<style>
-    button {
-        background: none;
-        border: none;
-        width: fit-content;
-        height: fit-content;
-    }
-</style>
