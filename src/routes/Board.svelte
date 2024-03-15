@@ -1,11 +1,11 @@
 <script>
-    /** @type {{ sights: Sight[], win: boolean }} */
-    let { sights, win } = $props();
+    /** @type {{ sights: Sight[], onWin: (win: boolean) => void }} */
+    let { sights, onWin } = $props();
 
     import Box from './Box.svelte';
 
     import { isInSeason } from '$lib/months';
-    import { dailyShuffle } from './shuffle';
+    import { dailyShuffle, isWinningBingoBoard } from '$lib/bingo';
 
     /** @type {CanvasRenderingContext2D|null} */
     let context = $state(null);
@@ -24,19 +24,14 @@
         .map(({ sight }) => sight);
 
     let generator = dailyShuffle(inSeasonSights);
-
     let boardIndex = $state(0);
 
-    /** @type {string[][]} */
-    let boards = [];
-
-    /** @type {boolean[][]} */
-    let boardStates = $state([]);
+    /** @type {string[][]} */ let boards = [];
+    /** @type {boolean[][]} */ let boardStates = $state([]);
 
     function makeNextBoard() {
         boardStates.push(Array(25).fill(false));
-        const { value } = generator.next();
-        boards.push(value);
+        boards.push(generator.next().value);
     }
 
     makeNextBoard();
@@ -44,66 +39,17 @@
     let board = $derived(boards[boardIndex].slice(0, 25).with(12, 'tree'));
     let boardState = $derived(boardStates[boardIndex]);
 
-    /** @param {number} n */
-    function* range(n) {
-        for (let i = 0; i < n; i++) {
-            yield i;
-        }
-    }
-
-    /**
-     * @param {boolean[]} inputBingoBoard
-     * @returns {{win: true, indices: number[]}|{win: false}} boardArray
-     */
-    function isWinningBingoBoard(inputBingoBoard) {
-        let bingoBoard = [...inputBingoBoard].with(12, true);
-
-        for (const row of range(5)) {
-            let indices = [...range(5)].map(col => row * 5 + col);
-
-            if (indices.every(i => bingoBoard[i])) {
-                return { win: true, indices };
-            }
-        }
-
-        for (const col of range(5)) {
-            let indices = [...range(5)].map(row => row * 5 + col);
-
-            if (indices.every(i => bingoBoard[i])) {
-                return { win: true, indices };
-            }
-        }
-
-        // Main diagonal
-        let indices = Array(5)
-            .fill(null)
-            .map((_, i) => i * 5 + i);
-        if (indices.every(i => bingoBoard[i])) return { win: true, indices };
-
-        indices = Array(5)
-            .fill(null)
-            .map((_, i) => i * 5 + (5 - i - 1));
-        if (indices.every(i => bingoBoard[i])) return { win: true, indices };
-
-        return { win: false };
-    }
-
     let boardData = $derived(isWinningBingoBoard(boardState));
     let winningIndexes = $derived(boardData.win ? boardData.indices : []);
 
-    $effect(() => {
-        win = boardData.win;
-    });
+    $effect(() => onWin(boardData.win));
 
     function previous() {
         if (boardIndex > 0) boardIndex--;
     }
 
     function next() {
-        if (boards.length <= boardIndex + 1) {
-            makeNextBoard();
-        }
-
+        while (boards.length <= boardIndex + 1) makeNextBoard();
         boardIndex++;
     }
 </script>

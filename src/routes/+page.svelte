@@ -7,11 +7,11 @@
 
     title('Nature Bingo');
 
-    let win = $state(false);
+    let isWinning = $state(false);
 </script>
 
 {#snippet winStar()}
-    {#if win}
+    {#if isWinning}
         <span class="icon is-medium has-text-primary">
             <i class="fa-solid fa-star"></i>
         </span>
@@ -21,8 +21,8 @@
 <main class="section">
     <h1 class="title has-text-centered">
         {@render winStar()}
-        <span class:has-text-primary={win}>Nature Bingo</span>
+        <span class:has-text-primary={isWinning}>Nature Bingo</span>
         {@render winStar()}
     </h1>
-    <Board {sights} bind:win />
+    <Board {sights} onWin={win => (isWinning = win)} />
 </main>

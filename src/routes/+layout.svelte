@@ -1,28 +1,18 @@
 <script>
-    let { children, data } = $props();
-    let { route } = $derived(data);
+    let { children } = $props();
     import { base } from '$app/paths';
 
-    let isHome = $derived(route.id == '/');
+    let menuActive = $state(false);
+
+    const links = [
+        { title: 'Home', icon: 'home', href: '' },
+        { title: 'Info', icon: 'circle-info', href: 'info' },
+    ];
 </script>
 
-<nav class="level is-mobile p-2">
-    <div class="level-left">
-        <div class="level-item">
-            <a class="has-text-dark" href={base + (isHome ? '/info' : '/')}>
-                <span class="icon is-medium m-16">
-                    <i
-                        class="fa-solid fa-2x"
-                        class:fa-bars={isHome}
-                        class:fa-home={!isHome}
-                    ></i>
-                </span>
-            </a>
-        </div>
-    </div>
-
-    <div class="level-right">
-        <div class="level-item">
+<nav class="navbar">
+    <div class="navbar-brand">
+        <div class="navbar-item">
             <span class="tag is-medium">
                 <span class="icon">
                     <i class="fa-solid fa-calendar"></i>
@@ -37,6 +27,31 @@
                     })()}
                 </span>
             </span>
+        </div>
+
+        <button
+            class="navbar-burger"
+            onclick={() => (menuActive = !menuActive)}
+            style="background: none; border: none;"
+        >
+            <div class="icon">
+                <i class="fa-solid fa-2x fa-bars"></i>
+            </div>
+        </button>
+    </div>
+
+    <div class="navbar-menu" class:is-active={menuActive}>
+        <div class="navbar-end">
+            {#each links as { title, icon, href }}
+                <a class="navbar-item" href="{base}/{href}">
+                    <span class="icon-text">
+                        <span class="icon">
+                            <i class="fa-solid fa-{icon}"></i>
+                        </span>
+                        <span>{title}</span>
+                    </span>
+                </a>
+            {/each}
         </div>
     </div>
 </nav>

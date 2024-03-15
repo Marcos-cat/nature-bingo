@@ -46,7 +46,7 @@ function parseSight(line) {
 }
 
 /** @type {import('./$types').LayoutLoad} */
-export async function load({ fetch, route }) {
+export async function load({ fetch }) {
     const resp = await fetch('/sights.txt');
     const content = await resp.text();
     const lines = content
@@ -56,5 +56,5 @@ export async function load({ fetch, route }) {
 
     const sights = lines.map(parseSight);
 
-    return { sights, route };
+    return { sights };
 }

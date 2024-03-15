@@ -1,3 +1,44 @@
+/** @param {number} n */
+export function range(n) {
+    return Array(n)
+        .fill(null)
+        .map((_, i) => i);
+}
+
+/**
+ * @param {boolean[]} inputBingoBoard
+ * @returns {{win: true, indices: number[]}|{win: false}} boardArray
+ */
+export function isWinningBingoBoard(inputBingoBoard) {
+    let bingoBoard = [...inputBingoBoard].with(12, true);
+
+    for (const row of range(5)) {
+        let indices = range(5).map(col => row * 5 + col);
+
+        if (indices.every(i => bingoBoard[i])) {
+            return { win: true, indices };
+        }
+    }
+
+    for (const col of range(5)) {
+        let indices = range(5).map(row => row * 5 + col);
+
+        if (indices.every(i => bingoBoard[i])) {
+            return { win: true, indices };
+        }
+    }
+
+    // Main diagonal
+    let indices = range(5).map(i => i * 5 + i);
+    if (indices.every(i => bingoBoard[i])) return { win: true, indices };
+
+    indices = range(5).map(i => i * 5 + (5 - i - 1));
+    if (indices.every(i => bingoBoard[i])) return { win: true, indices };
+
+    return { win: false };
+}
+
+
 function daysSinceNewYear() {
     const now = new Date();
     const startOfYear = new Date(now.getFullYear(), 0, 1);
