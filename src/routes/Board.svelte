@@ -34,7 +34,12 @@
         boards.push(generator.next().value);
     }
 
-    makeNextBoard();
+    /** @param {number} newBoardIndex */
+    function generateNecessaryBoards(newBoardIndex) {
+        while (boards.length <= newBoardIndex) makeNextBoard();
+    }
+
+    generateNecessaryBoards(0);
 
     let board = $derived(boards[boardIndex].slice(0, 25).with(12, 'tree'));
     let boardState = $derived(boardStates[boardIndex]);
@@ -49,7 +54,7 @@
     }
 
     function next() {
-        while (boards.length <= boardIndex + 1) makeNextBoard();
+        generateNecessaryBoards(boardIndex + 1);
         boardIndex++;
     }
 </script>
