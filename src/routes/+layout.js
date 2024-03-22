@@ -24,7 +24,7 @@ function month(monthAbbreviation) {
  * @returns {Sight}
  */
 function parseSight(line) {
-    /** @type {Record<string, {start: number, end: number}>} */
+    /** @type {Record<string, { start: number, end: number }>} */
     const specialTimes = {
         all: { start: month('jan'), end: month('dec') },
         summer: { start: month('apr'), end: month('sep') },
