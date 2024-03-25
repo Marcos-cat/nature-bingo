@@ -37,7 +37,7 @@
             onclick={() => (menuActive = !menuActive)}
             style="background: none; border: none;"
         >
-            <div class="icon has-text-grey">
+            <div class="icon">
                 <i class="fa-solid fa-2x fa-bars"></i>
             </div>
         </button>

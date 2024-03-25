@@ -45,7 +45,7 @@
     <span class="icon-text">
         {#if collapsable}
             <button
-                class="icon is-clickable"
+                class="icon is-clickable mr-2"
                 onclick={() => (expanded = !expanded)}
                 style="background: none; border: none;"
             >

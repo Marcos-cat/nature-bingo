@@ -76,7 +76,7 @@
     <nav class="field is-grouped is-grouped-centered">
         <div class="control">
             <button
-                class="button is-primary"
+                class="button is-link"
                 onclick={previous}
                 disabled={boardIndex == 0}
             >
@@ -92,7 +92,7 @@
         </div>
 
         <div class="control">
-            <button class="button is-primary" onclick={next}>
+            <button class="button is-link" onclick={next}>
                 <span>Next</span>
                 <span class="icon">
                     <i class="fa-solid fa-chevron-right"></i>
