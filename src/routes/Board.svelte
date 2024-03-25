@@ -60,19 +60,21 @@
 </script>
 
 {#if context}
-    <div class="container mb-6 p-0">
-        {#each board as sight, i}
-            <Box
-                {sight}
-                {context}
-                winning={winningIndexes.includes(i)}
-                bind:selected={boardState[i]}
-            />
-        {/each}
+    <div class="fixed-grid has-5-cols mb-6">
+        <div class="grid is-gap-0.5">
+            {#each board as sight, i}
+                <Box
+                    {sight}
+                    {context}
+                    winning={winningIndexes.includes(i)}
+                    bind:selected={boardState[i]}
+                />
+            {/each}
+        </div>
     </div>
 
-    <nav class="level is-mobile">
-        <div class="level-item">
+    <nav class="field is-grouped is-grouped-centered">
+        <div class="control">
             <button
                 class="button is-primary"
                 onclick={previous}
@@ -85,13 +87,11 @@
             </button>
         </div>
 
-        <div class="level-item">
-            <span id="board-counter" class="tag is-large">
-                {boardIndex + 1}
-            </span>
+        <div class="control">
+            <span class="tag is-large">{boardIndex + 1}</span>
         </div>
 
-        <div class="level-item">
+        <div class="control">
             <button class="button is-primary" onclick={next}>
                 <span>Next</span>
                 <span class="icon">
@@ -103,13 +103,9 @@
 {/if}
 
 <style>
-    div.container {
-        --gap: 4px;
-        max-width: 20rem;
-
-        display: grid;
-        grid-template-columns: repeat(5, calc(20% - var(--gap)));
-        gap: var(--gap);
+    div.grid {
+        max-width: 25rem;
+        margin: auto;
     }
 
     button {

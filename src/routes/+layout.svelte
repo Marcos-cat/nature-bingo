@@ -8,24 +8,29 @@
         { title: 'Home', icon: 'home', href: '' },
         { title: 'Info', icon: 'circle-info', href: 'info' },
     ];
+
+    function getDate() {
+        const now = new Date();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const year = now.getFullYear().toString().slice(-2);
+        return `${month}/${day}/${year}`;
+    }
 </script>
 
 <nav class="navbar">
     <div class="navbar-brand">
+        <a class="navbar-item" href="{base}/">
+            <figure class="image is-1x1">
+                <img src="{base}/favicon.svg" alt="Leaf Logo" />
+            </figure>
+        </a>
         <div class="navbar-item">
             <span class="tag is-medium">
                 <span class="icon">
                     <i class="fa-solid fa-calendar"></i>
                 </span>
-                <span>
-                    {(function getDate() {
-                        const now = new Date();
-                        const month = now.getMonth() + 1;
-                        const day = now.getDate();
-                        const year = now.getFullYear().toString().slice(-2);
-                        return `${month}/${day}/${year}`;
-                    })()}
-                </span>
+                <span>{getDate()}</span>
             </span>
         </div>
 
@@ -34,7 +39,7 @@
             onclick={() => (menuActive = !menuActive)}
             style="background: none; border: none;"
         >
-            <div class="icon">
+            <div class="icon has-text-grey">
                 <i class="fa-solid fa-2x fa-bars"></i>
             </div>
         </button>
@@ -56,4 +61,6 @@
     </div>
 </nav>
 
-{@render children()}
+<main class="section">
+    {@render children()}
+</main>

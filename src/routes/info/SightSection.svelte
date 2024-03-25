@@ -45,14 +45,13 @@
     <span class="icon-text">
         {#if collapsable}
             <button
-                class="icon is-clickable has-text-dark"
+                class="icon is-clickable"
                 onclick={() => (expanded = !expanded)}
                 style="background: none; border: none;"
             >
                 <i
-                    class="fa-solid fa-2x"
-                    class:fa-caret-down={expanded}
-                    class:fa-caret-right={!expanded}
+                    class="fa-solid fa-2x fa-caret-down"
+                    class:collapsed={!expanded}
                 ></i>
             </button>
         {/if}
@@ -65,10 +64,7 @@
         <div class="columns is-mobile is-multiline">
             {#each filteredList as sight}
                 <div class="column is-half">
-                    <div
-                        class="notification is-light"
-                        class:is-primary={colored}
-                    >
+                    <div class="notification" class:is-primary={colored}>
                         <h2 class="has-text-weight-bold is-capitalized">
                             {sight.sight}
                         </h2>
@@ -92,3 +88,12 @@
         </div>
     {/if}
 {/if}
+
+<style>
+    i {
+        transition: transform 250ms ease;
+        &.collapsed {
+            transform: rotate(-90deg);
+        }
+    }
+</style>

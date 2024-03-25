@@ -51,61 +51,43 @@
     });
 </script>
 
-<button
-    disabled={isTree}
-    bind:this={button}
-    class="box is-clickable"
-    class:winning
-    class:has-background-primary-light={selected || isTree}
-    class:has-text-primary={selected || isTree}
-    onclick={() => (selected = !selected)}
->
-    {shortenedSight}
-</button>
+<div class="cell">
+    <button
+        disabled={isTree}
+        bind:this={button}
+        class="box is-clickable is-size-7 m-0 p-0"
+        class:winning
+        class:has-text-weight-bold={winning}
+        class:has-background-primary={selected || isTree}
+        class:has-text-dark={selected || isTree}
+        onclick={() => (selected = !selected)}
+    >
+        {shortenedSight}
+    </button>
+</div>
 
 <style>
     @keyframes bounce {
-        0% {
-            transform: scale(1);
-        }
-
         50% {
             transform: scale(1.1);
-            rotate: 3deg;
-        }
-        100% {
-            transform: scale(1);
         }
     }
 
     button.winning {
-        animation: bounce 1s ease 1 forwards;
+        animation: bounce 1s ease forwards;
         font-weight: bold;
     }
 
     button.box {
         overflow: hidden;
-
-        background: none;
-        padding: 2px;
-        margin: 0;
         aspect-ratio: 1;
-        display: flex;
-        border: none;
 
         align-items: center;
         justify-content: center;
 
-        border-radius: 0;
-    }
-
-    p {
-        width: fit-content;
-        height: fit-content;
-        margin: 0;
-
-        font-size: 1em;
-        line-height: 1.25em;
-        text-align: center;
+        width: 100%;
+        @media only screen and (max-width: 650px) {
+            width: 17vw;
+        }
     }
 </style>
