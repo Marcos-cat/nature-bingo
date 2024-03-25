@@ -92,8 +92,8 @@
 <style>
     i {
         transition: transform 250ms ease;
-        &.collapsed {
-            transform: rotate(-90deg);
-        }
+    }
+    i.collasped {
+        transform: rotate(-90deg);
     }
 </style>
