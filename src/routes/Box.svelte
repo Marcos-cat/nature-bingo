@@ -86,7 +86,10 @@
         justify-content: center;
 
         width: 100%;
-        @media only screen and (max-width: 650px) {
+    }
+
+    @media only screen and (max-width: 650px) {
+        button.box {
             width: 17vw;
         }
     }
