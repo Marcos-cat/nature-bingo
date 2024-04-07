@@ -34,10 +34,12 @@
         return removeWhitespace(term).includes(removeWhitespace(search));
     }
 
+    let searching = $derived(search !== '');
+
     let filteredList = $derived(
-        search === ''
-            ? sightList
-            : sightList.filter(({ sight }) => fuzzySearch(sight)),
+        searching
+            ? sightList.filter(({ sight }) => fuzzySearch(sight))
+            : sightList,
     );
 </script>
 
@@ -45,7 +47,7 @@
     <span class="icon-text">
         {#if collapsable}
             <button
-                class="icon is-clickable mr-2"
+                class="icon is-clickable has-text-link mr-2"
                 onclick={() => (expanded = !expanded)}
                 style="background: none; border: none;"
             >
@@ -55,7 +57,19 @@
                 ></i>
             </button>
         {/if}
-        <span>{@render children()}</span>
+        <span>
+            <span>
+                {@render children()}
+            </span>
+            <span class="tag">
+                {sightList.length}
+            </span>
+            {#if searching}
+                <span class="tag is-link">
+                    {filteredList.length}
+                </span>
+            {/if}
+        </span>
     </span>
 </h2>
 

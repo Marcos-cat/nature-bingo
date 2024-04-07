@@ -39,7 +39,7 @@ mosquito: may-sep
 kayak: may-oct
 apple: jun-nov
 dragonfly: may-sep
-CNC staff member: all
+park staff member: all
 robin: apr-aug
 birdhouse: all
 river: all
