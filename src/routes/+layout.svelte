@@ -21,7 +21,7 @@
 <nav class="navbar">
     <div class="navbar-brand">
         <a class="navbar-item" href="{base}/">
-            <img src="{base}/favicon.svg" alt="Leaf Logo" />
+            <img src="{base}/favicon.svg" alt="" />
         </a>
         <div class="navbar-item">
             <span class="tag is-medium">
