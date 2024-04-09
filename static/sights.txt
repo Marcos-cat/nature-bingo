@@ -10,7 +10,7 @@ turtle: summer
 snapping turtle: summer
 frog or toad: summer
 snake: summer
-tadpole or pollywog: summer
+tadpole or polliwog: summer
 salamander: summer
 deer: all
 squirrel: all
@@ -25,9 +25,9 @@ egret: all
 person you know: all
 muskrat: all
 stick fort: all
-lilly pad: may-sep
+lily pad: may-sep
 deer tracks: all
-racoon or opossum tracks: all
+raccoon or opossum tracks: all
 scat: all
 cow: farm
 pig: farm
