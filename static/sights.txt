@@ -47,3 +47,7 @@ pond: all
 fungi: all
 sap bucket: feb-mar
 snow: dec-mar
+vulture: all
+groundhog: mar-nov
+fish: apr-sep
+red-winged blackbird: apr-sep

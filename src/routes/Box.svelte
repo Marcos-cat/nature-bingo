@@ -5,7 +5,7 @@
         winning: boolean,
         context: CanvasRenderingContext2D 
     }} */
-    let { winning, sight, selected, context } = $props();
+    let { winning, sight, selected = $bindable(), context } = $props();
 
     let isTree = $derived(sight == 'tree');
 
