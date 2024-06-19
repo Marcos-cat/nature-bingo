@@ -1,4 +1,5 @@
 <script>
+    import { Sight } from '$lib/months';
     /** @type {{
         sightList: Sight[],
         search: string,
@@ -15,8 +16,6 @@
         search,
         children,
     } = $props();
-
-    import { toMonthName } from '$lib/months';
 
     let expanded = $state(true);
 
@@ -85,8 +84,8 @@
                         {#if showsInfo}
                             {@const { start, end } = sight.duration}
                             <p class="subtitle is-6">
-                                In season from {toMonthName(start)}
-                                to {toMonthName(end)}
+                                In season from {start}
+                                to {end}
                             </p>
                         {/if}
                     </div>
@@ -106,9 +105,8 @@
 <style>
     i {
         transition: transform 250ms ease;
-    }
-
-    i.collapsed {
-        transform: rotate(-90deg);
+        &.collapsed {
+            transform: rotate(-90deg);
+        }
     }
 </style>

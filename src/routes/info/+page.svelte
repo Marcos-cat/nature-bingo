@@ -4,7 +4,6 @@
 
     import SightSection from './SightSection.svelte';
 
-    import { isInSeason, isAlwaysInSeason } from '$lib/months';
     import { title } from '$lib/title.svelte';
 
     title('Info | Nature Bingo');
@@ -13,29 +12,16 @@
 
     const currentMonth = new Date().getMonth();
 
-    const ALWAYS = 0;
-    const IN_SEASON = 1;
-    const NOT_IN_SEASON = 2;
-
-    const [alwaysInSeasonSights, inSeasonSights, notInSeasonSights] =
-        sights.reduce(
-            (/** @type {Sight[][]} */ acc, sight) => {
-                if (isAlwaysInSeason(sight)) {
-                    acc[ALWAYS].push(sight);
-                    return acc;
-                }
-
-                if (isInSeason(currentMonth, sight)) {
-                    acc[IN_SEASON].push(sight);
-                    return acc;
-                }
-
-                acc[NOT_IN_SEASON].push(sight);
-                return acc;
-            },
-            [[], [], []],
-        );
+    const { alwaysInSeason, inSeason, notInSeason } = Object.groupBy(
+        sights,
+        (sight, _) => {
+            if (sight.isAlwaysInSeason) return 'alwaysInSeason';
+            if (sight.isInSeason(currentMonth)) return 'inSeason';
+            return 'notInSeason';
+        },
+    );
 </script>
+
 
 <h1 class="title is-spaced has-text-centered">Nature Bingo</h1>
 
@@ -48,14 +34,14 @@
     </div>
 </div>
 
-<SightSection sightList={inSeasonSights} {search} colored showsInfo>
+<SightSection sightList={inSeason ?? []} {search} colored showsInfo>
     Currently In Season
 </SightSection>
 
-<SightSection sightList={notInSeasonSights} {search} showsInfo>
+<SightSection sightList={notInSeason ?? []} {search} showsInfo>
     Not In Season
 </SightSection>
 
-<SightSection sightList={alwaysInSeasonSights} {search} colored>
+<SightSection sightList={alwaysInSeason ?? []} {search} colored>
     Always In Season
 </SightSection>

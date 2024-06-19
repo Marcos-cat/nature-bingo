@@ -1,10 +1,8 @@
 <script>
-    /** @type {{ sights: Sight[], onWin: (win: boolean) => void }} */
+    /** @type {{ sights: import('$lib/months').Sight[], onWin: (win: boolean) => void }} */
     let { sights, onWin } = $props();
 
     import Box from './Box.svelte';
-
-    import { isInSeason } from '$lib/months';
     import { dailyShuffle, isWinningBingoBoard } from '$lib/bingo';
 
     /** @type {CanvasRenderingContext2D|null} */
@@ -20,7 +18,7 @@
     const currentMonth = new Date().getMonth();
 
     const inSeasonSights = sights
-        .filter(sight => isInSeason(currentMonth, sight))
+        .filter(sight => sight.isInSeason(currentMonth))
         .map(({ sight }) => sight);
 
     let generator = dailyShuffle(inSeasonSights);

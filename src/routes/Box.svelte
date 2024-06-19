@@ -73,24 +73,23 @@
         }
     }
 
-    button.winning {
-        animation: bounce 1s ease forwards;
-        font-weight: bold;
-    }
+    button {
+        &.winning {
+            animation: bounce 1s ease forwards;
+            font-weight: bold;
+        }
+        &.box {
+            overflow: hidden;
+            aspect-ratio: 1;
 
-    button.box {
-        overflow: hidden;
-        aspect-ratio: 1;
+            align-items: center;
+            justify-content: center;
 
-        align-items: center;
-        justify-content: center;
+            width: 100%;
 
-        width: 100%;
-    }
-
-    @media only screen and (max-width: 650px) {
-        button.box {
-            width: 17vw;
+            @media only screen and (max-width: 475px) {
+                width: 17vw;
+            }
         }
     }
 </style>
