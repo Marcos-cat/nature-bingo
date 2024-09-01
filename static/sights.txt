@@ -51,3 +51,5 @@ vulture: all
 groundhog: mar-nov
 fish: apr-sep
 red-winged blackbird: apr-sep
+goldfinch: may-aug
+lost feather: apr-oct
