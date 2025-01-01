@@ -38,7 +38,6 @@ export function isWinningBingoBoard(inputBingoBoard) {
     return { win: false };
 }
 
-
 function daysSinceNewYear() {
     const now = new Date();
     const startOfYear = new Date(now.getFullYear(), 0, 1);
@@ -50,7 +49,9 @@ function daysSinceNewYear() {
 /** @param {number} n */
 function xorShift(n) {
     n ^= n << 13;
+    n |= 67;
     n ^= n >> 17;
+    n |= 69;
     n ^= n << 5;
     return n;
 }
