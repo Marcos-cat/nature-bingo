@@ -36,6 +36,7 @@
             class="navbar-burger"
             onclick={() => (menuActive = !menuActive)}
             style="background: none; border: none;"
+            aria-label="open navbar"
         >
             <div class="icon">
                 <i class="fa-solid fa-2x fa-bars"></i>
